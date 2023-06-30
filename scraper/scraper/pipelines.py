@@ -22,7 +22,7 @@ class ScraperPipeline:
                 # Commit the transaction to persist the changes
                 self.connection.commit()
         except Exception as e:
-            logging.error("Error inserting data: %s", str(e))
+                logging.error("Error inserting data: %s", str(e))
 
     def process_item(self, item, spider):
         self.insertData(item)
