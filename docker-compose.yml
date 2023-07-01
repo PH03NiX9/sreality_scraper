@@ -1,0 +1,12 @@
+version: '1'
+services:
+  scraper_database:
+    image: docker.io/library/postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=scraperdatabase
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata_scraper:/var/lib/postgresql/data:Z
+      - ./db/init.sql:/docker-entrypoint-initdb.d/
