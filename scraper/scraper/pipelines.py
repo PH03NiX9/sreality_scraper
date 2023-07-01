@@ -7,7 +7,14 @@ class ScraperPipeline:
         self.create_connection()
 
     def create_connection(self):
-        pass
+        self.connection = psycopg2.connect(
+            host = 'localhost',
+            user = 'postgres',
+            password='scraperdatabase',
+            database='scraper',
+            port='5432'
+        )
+        self.curr = self.connection.cursor()
 
     def insertData(self, item):
         try:
