@@ -8,7 +8,7 @@ class ScraperPipeline:
 
     def create_connection(self):
         self.connection = psycopg2.connect(
-            host = 'localhost',
+            host = 'scraper_database',
             user = 'postgres',
             password='scraperdatabase',
             database='scraper',
