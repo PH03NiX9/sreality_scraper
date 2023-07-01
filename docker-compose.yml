@@ -10,5 +10,16 @@ services:
     volumes:
       - pgdata_scraper:/var/lib/postgresql/data:Z
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:Z
+
+  scraper_crawler:
+    image: docker.io/library/python:latest
+    build:
+      context: ./scraper
+      dockerfile: Containerfile
+    volumes:
+      - ./scraper:/app:Z
+    depends_on:
+      - scraper_database
+
 volumes:
   pgdata_scraper:
