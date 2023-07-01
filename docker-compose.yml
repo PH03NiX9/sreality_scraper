@@ -10,3 +10,5 @@ services:
     volumes:
       - pgdata_scraper:/var/lib/postgresql/data:Z
       - ./db/init.sql:/docker-entrypoint-initdb.d/
+volumes:
+  pgdata_scraper:
