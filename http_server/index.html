@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>500 Listings</title>
+</head>
+<body>
+	<h1>500 Listings:</h1>
+	<ul>
+		{% for item in data %}
+		<li>
+			<h2>{{ item[0] }}</h2>
+			<img src="{{ item[1] }}" alt="image">
+		</li>
+		{% endfor %}
+	</ul>
+</body>
+</html>

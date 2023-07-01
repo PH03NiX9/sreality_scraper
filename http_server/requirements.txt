@@ -1,2 +1,2 @@
-scrapy
+flask
 psycopg2-binary

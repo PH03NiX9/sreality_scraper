@@ -1,12 +1,17 @@
-FROM python:latest
+# python image
+FROM python:3.9-slim
 
+# working directory inside the container
 WORKDIR /app
 
-COPY requirements.txt .
-
-RUN pip3 install --no-cache-dir -r requirements.txt
-
+# copying files to the working directory
 COPY . .
 
-ENTRYPOINT ["scrapy", "crawl", "srealityspider"]
+# install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
+# setting the entry point for the container
+ENTRYPOINT ["python3"]
+
+# running the server
+CMD ["server.py"]

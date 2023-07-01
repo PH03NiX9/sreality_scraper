@@ -8,8 +8,8 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - pgdata_scraper:/var/lib/postgresql/data:Z
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:Z
+     - pgdata_scraper:/var/lib/postgresql/data:Z
+     - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:Z
     networks:
       - scraper_network
 
@@ -19,6 +19,17 @@ services:
       dockerfile: Containerfile
     volumes:
       - ./scraper:/app:Z
+    depends_on:
+      - scraper_database
+    networks:
+     - scraper_network
+      
+  scraper_server:
+    build:
+      context: ./http_server
+      dockerfile: Containerfile
+    ports:
+      - 8080:8080
     depends_on:
       - scraper_database
     networks:
