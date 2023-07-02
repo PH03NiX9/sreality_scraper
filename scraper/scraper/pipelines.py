@@ -26,8 +26,8 @@ class ScraperPipeline:
                 # Execute an INSERT query to insert the data into the table
                 self.curr.execute("INSERT INTO scraped (title, image_url) VALUES (%s, %s)", (title, image_url))
 
-                # Commit the transaction to persist the changes
-                self.connection.commit()
+            # Commit the transaction to persist the changes
+            self.connection.commit()
         except Exception as e:
                 logging.error("Error inserting data: %s", str(e))
 

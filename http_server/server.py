@@ -27,7 +27,7 @@ def fetch_data():
 def index():
     # Renders the index.html template with the data fetched from the database
     data = fetch_data()
-    return render_template('index.html', data=data)
+    return render_template('/index.html', data=data)
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port='8080')
+    app.run(host='127.0.0.1', port=8080)
