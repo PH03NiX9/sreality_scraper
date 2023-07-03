@@ -12,6 +12,12 @@ services:
      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:Z
     networks:
       - scraper_network
+    healthcheck:
+      test: ["CMD", "psql", "-U", "postgres", "scraper", "-c", "SELECT * FROM scraped;"]
+      interval: 1m30s
+      timeout: 15s
+      retries: 5
+      start_period: 15s
 
   scraper_crawler:
     build:
@@ -20,9 +26,12 @@ services:
     volumes:
       - ./scraper:/app:Z
     depends_on:
+      scraper_database:
+        condition: service_healthy
+    links:
       - scraper_database
     networks:
-     - scraper_network
+      - scraper_network
       
   scraper_server:
     build:
@@ -31,6 +40,9 @@ services:
     ports:
       - 8080:8080
     depends_on:
+      scraper_database:
+        condition: service_healthy
+    links:
       - scraper_database
     networks:
       - scraper_network
